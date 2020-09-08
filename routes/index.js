@@ -24,15 +24,16 @@ const upload = multer({
 
 function checkFileType(file,cb){
   //extensiones permitidas
-  const filetype = /jpeg|jpg|png|gif/;
+  const filetypes = /jpeg|jpg|png|gif/;
   
   //chequeo las extensiones
-  const extname = filetype.test(path.extname(file.originalname).toLocaleLowerCase); //devuelve un booleano
+  const extname = filetypes.test(path.extname(file.originalname).toLocaleLowerCase); //devuelve un booleano
 
   //chequeo MIME
-  const mimetype = filetype.test(file.mimetype); //devuelve un booleano
+  const mimetype = filetypes.test(file.mimetype); //devuelve un booleano
 
-  if(mimetype && extname){
+  console.log(`mimetype: ${mimetype}, extname: ${extname}` )
+  if(mimetype){
     return cb(null,true);
   }else{
     cb('Error: Images Only!!')
@@ -56,9 +57,10 @@ router.post('/upload',function(req,res){
          msg:"Error: No File Selected!!"
        })
      }else{
+       console.log(req.file.filename)
        res.render('index',{
-         msg: "File Uploaded!!",
-         img: req.filename
+         msg: req.file.filename + ".File Uploaded!!",
+         img: req.file.filename
        })
      }
   }
