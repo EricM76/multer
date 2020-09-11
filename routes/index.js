@@ -8,26 +8,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/upload',upload,function(req,res){
-  upload(req,res,function(error){
-    if(error){
-      res.render('index',{
-        msg:error
-      })
-    }else{
-     if(req.file == undefined){
-       res.render('index',{
-         msg:"Error: No File Selected!!"
+router.post('/upload',upload.any(),function(req,res){
+
+        res.render('index',{
+         msg: req.files[0].filename + ".File Uploaded!!",
+         img: req.files[0].filename
        })
-     }else{
-       console.log(req.file.filename)
-       res.render('index',{
-         msg: req.file.filename + ".File Uploaded!!",
-         img: req.file.filename
-       })
-     }
-  }
-})
-})
+     })
 
 module.exports = router;
