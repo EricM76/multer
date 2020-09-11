@@ -16,23 +16,24 @@
     <div class="container">
         <h1>File Upload Multer</h1>
         <%= typeof msg != "undefined"?msg:"" %>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <div class="file-field input-field">
-                    <div class="btn grey">
-                        <span>File</span>
-                        <input type="file" name="myImage">
+            <%= typeof error != "undefined"?error:"" %>
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <div class="file-field input-field">
+                        <div class="btn grey">
+                            <span>File</span>
+                            <input type="file" name="avatar">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
                     </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
-                    </div>
-                </div>
-                <button type="submit" class="btn">Enviar</button>
-            </form>
-            <br>
-            <% if (typeof img != "undefined") { %>
-                <img src="/uploads/<%- img %> " alt=" " class="">
+                    <button type="submit" class="btn">Enviar</button>
+                </form>
+                <br>
+                <% if (typeof img != "undefined") { %>
+                    <img src="/uploads/<%- img %> " alt=" " class="">
 
-                <% } %>
+                    <% } %>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js " integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script>

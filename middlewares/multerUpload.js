@@ -7,7 +7,7 @@ var storage = multer.diskStorage({
     cb(null, 'public/uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
+    cb(null, file.fieldname + '-' + Date.now() + '.' + path.extname(file.originalname))
   }
 })
 
@@ -17,8 +17,10 @@ var storage = multer.diskStorage({
     fileFilter:function(req,file,cb){
       console.log(file)
       if(path.extname(file.originalname)!= '.jpg'){
-        cb(null,false);
-        return cb(new Error('Solo imagenes'))
+        let err = new Error("only images")
+        cb(err,false);
+        //return err
+
       }else{
         cb(null,true);
       }
