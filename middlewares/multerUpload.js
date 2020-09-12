@@ -16,14 +16,23 @@ var storage = multer.diskStorage({
     limits:{fileSize:2097152}, //dos megabyte
     fileFilter:function(req,file,cb){
       console.log(file)
-      if(path.extname(file.originalname)!= '.jpg'){
+      let ext = path.extname(file.originalname);
+      if(ext == '.jpg'){
+        cb(null,true);
+      }else{
+        let err = new Error("only images")
+        cb(err,false);
+      }
+
+      /*if(ext != '.jpg'){
         let err = new Error("only images")
         cb(err,false);
         //return err
 
       }else{
         cb(null,true);
-      }
+      }*/
+
       }
     })
 
